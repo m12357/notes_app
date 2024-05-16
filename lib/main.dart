@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes/views/notes_view.dart';
 
-void main(){
+void main() {
   runApp(const NotesApp());
 }
 
@@ -16,11 +16,8 @@ class _State extends State<NotesApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        brightness: Brightness.dark
-
-      ),
-      home: const  NotesView(),
+      theme: ThemeData(brightness: Brightness.dark, fontFamily: "Poppins"),
+      home: const NotesView(),
     );
   }
 }
