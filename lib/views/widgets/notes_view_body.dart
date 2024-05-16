@@ -4,7 +4,7 @@ import 'custom_note_item.dart';
 import 'notes_list.view.dart';
 
 class NotesViewBody extends StatelessWidget {
-  const NotesViewBody({Key? Key}) : super(key: Key);
+  const  NotesViewBody({Key? Key}) : super(key: Key);
 
   @override
   Widget build(BuildContext context) {
