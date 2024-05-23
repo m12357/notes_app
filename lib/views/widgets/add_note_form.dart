@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:notes/cubit/add_note_cubit/add_notes_cubit.dart';
 import 'package:notes/models/note_model.dart';
-
+import 'color_list_view.dart';
 import 'custom_button.dart';
 import 'custom_text_field.dart';
 
@@ -25,7 +26,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
       autovalidateMode: autovalidateMode,
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 32,
           ),
           CustomTextFieLd(
@@ -34,7 +35,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
             },
             hint: "title",
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           CustomTextFieLd(
@@ -44,20 +45,27 @@ class _AddNoteFormState extends State<AddNoteForm> {
             hint: "content",
             maxlines: 5,
           ),
-          SizedBox(
+          const SizedBox(
             height: 32,
           ),
-          BlocBuilder<AddNoteCubit,AddNotesState>(
+          const ColorListView(),
+          const SizedBox(
+            height: 32,
+          ),
+          BlocBuilder<AddNoteCubit, AddNotesState>(
             builder: (context, state) {
               return CustomButton(
                 isLoading: state is AddNotesLoading ? true : false,
                 onTap: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
+                    var currentDate = DateTime.now();
+                    var formattedCurrentDate =
+                        DateFormat.yMd().format(currentDate);
                     var noteModel = NoteModel(
                         title: title!,
                         color: Colors.amber.value,
-                        date: DateTime.now().toString(),
+                        date: formattedCurrentDate,
                         subtitle: subtitle!);
                     BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
                   } else {
@@ -68,7 +76,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
               );
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
         ],
